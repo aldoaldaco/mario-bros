@@ -30,7 +30,7 @@
         100% {top: 120px;left: 0;}
       }
       .animate-avatar {
-        animation: avatar 300ms;
+        animation: avatar 260ms;
       }
       img {
         width: 45px;
@@ -75,7 +75,7 @@
       }
       disconnectedCallback() {
         super.disconnectedCallback();
-        this.$.coin.removeEventListener('animationend', () => {
+        this.$.avatar.removeEventListener('animationend', () => {
           this.canPress = false;
         });
       }
@@ -83,6 +83,13 @@
         if(this.canPress) {
           this.canPress = false;
           this.$.avatar.classList.add('animate-avatar');
+          setTimeout(() => {
+            this.dispatchEvent(new CustomEvent('mario-jump', {
+              bubbles: true,
+              composed: true,
+              detail: true
+            }))
+          }, 260);
         }
       }
     }
